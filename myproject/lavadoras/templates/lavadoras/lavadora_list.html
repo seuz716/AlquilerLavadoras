@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Listado de Lavadoras</h2>
+  <a class="btn btn-primary" href="{% url 'lavadoras-create' %}">Crear Lavadora</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Horas de Vida Útil</th>
+        <th>Costo</th>
+        <th>Consumo de Energía (kW/h)</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lavadora in lavadoras %}
+        <tr>
+          <td>{{ lavadora.nombre }}</td>
+          <td>{{ lavadora.horas_de_vida_util }}</td>
+          <td>{{ lavadora.costo }}</td>
+          <td>{{ lavadora.consumo_de_energia_kw_h }}</td>
+          <td>
+            <a class="btn btn-warning" href="{% url 'lavadoras-update' lavadora.pk %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'lavadoras-delete' lavadora.pk %}">Eliminar</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No hay lavadoras disponibles.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
